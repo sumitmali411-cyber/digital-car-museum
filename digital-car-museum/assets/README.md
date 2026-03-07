@@ -105,10 +105,9 @@ Always provide WebP with a JPG fallback for older browsers.
 
 ## Adding Assets
 
-1. Place images in the correct `by-country/{country}/{manufacturer}/images/` folder
-2. Place GLB files in `by-country/{country}/{manufacturer}/models-3d/` folder
-3. Register the asset in the database via the admin API (`POST /api/v1/admin/cars/{id}/model3d/upload`)
-4. The backend stores the DB record; this folder is the file origin for seeding
+1. To add a 3D model, upload the GLB file using the admin API endpoint: `POST /api/v1/admin/cars/{id}/model3d/upload`.
+2. The backend service will store the file in the correct directory and create the database record.
+3. For adding images, please refer to the `docs/photo-sourcing-guide.md`.
 
 ---
 
