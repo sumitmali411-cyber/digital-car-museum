@@ -242,7 +242,7 @@ For cars with limited photos:
 - [ ] PBR materials (Metallic-Roughness workflow)
 - [ ] No leftover bones/armatures (unless animated)
 - [ ] Validated with `npx gltf-validator`
-- [ ] Attribution noted in filename comment or separate .txt
+- [ ] Attribution noted in a companion `attribution.txt` file or in the database record.
 
 ---
 
