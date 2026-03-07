@@ -141,7 +141,7 @@ old photographs available. Good for stylized/wireframe aesthetic.
 
 ```bash
 # Install Shap-E
-pip install -e git+https://github.com/openai/shap-e#egg=shap_e
+pip install git+https://github.com/openai/shap-e#egg=shap_e
 
 # Generate from image
 python -c "
