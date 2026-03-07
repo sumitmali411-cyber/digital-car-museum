@@ -98,7 +98,7 @@ Always provide WebP with a JPG fallback for older browsers.
 | Compression     | Draco (mandatory)      |
 | Max file size   | 50 MB                  |
 | Texture maps    | Albedo, Normal, Metal/Rough |
-| LOD             | Single mesh (LOD handled by Three.js) |
+| LOD             | Single mesh provided; LODs are managed by the application. |
 | Y-up            | Yes (GLTF standard)    |
 
 ---
