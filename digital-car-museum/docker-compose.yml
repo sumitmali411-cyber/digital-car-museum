@@ -1,0 +1,116 @@
+version: "3.9"
+
+services:
+  # ─── MySQL Database ───
+  mysql:
+    image: mysql:8.0
+    container_name: autovault-mysql
+    restart: unless-stopped
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root_secret
+      MYSQL_DATABASE: autovault
+      MYSQL_USER: autovault
+      MYSQL_PASSWORD: autovault_secret
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./docker/mysql/init:/docker-entrypoint-initdb.d
+    networks:
+      - autovault-net
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ─── Keycloak Auth Server ───
+  keycloak:
+    image: quay.io/keycloak/keycloak:25.0
+    container_name: autovault-keycloak
+    restart: unless-stopped
+    ports:
+      - "8180:8080"
+    environment:
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+      KC_DB: mysql
+      KC_DB_URL: jdbc:mysql://mysql:3306/keycloak?createDatabaseIfNotExist=true
+      KC_DB_USERNAME: root
+      KC_DB_PASSWORD: root_secret
+      KC_HOSTNAME: localhost
+      KC_HOSTNAME_PORT: 8180
+      KC_HTTP_ENABLED: "true"
+      KC_HOSTNAME_STRICT: "false"
+      KC_HOSTNAME_STRICT_HTTPS: "false"
+    command: ["start-dev", "--import-realm"]
+    volumes:
+      - ./docker/keycloak/realm-export.json:/opt/keycloak/data/import/realm-export.json
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - autovault-net
+
+  # ─── Spring Boot Backend ───
+  autovault-api:
+    build:
+      context: ./autovault-api
+      dockerfile: Dockerfile
+    container_name: autovault-api
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/autovault?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: autovault
+      SPRING_DATASOURCE_PASSWORD: autovault_secret
+      SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI: http://keycloak:8080/realms/autovault
+      SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI: http://keycloak:8080/realms/autovault/protocol/openid-connect/certs
+    volumes:
+      - model_storage:/app/storage
+    depends_on:
+      mysql:
+        condition: service_healthy
+      keycloak:
+        condition: service_started
+    networks:
+      - autovault-net
+
+  # ─── Angular Frontend ───
+  autovault-frontend:
+    build:
+      context: ./autovault-frontend
+      dockerfile: Dockerfile
+    container_name: autovault-frontend
+    restart: unless-stopped
+    ports:
+      - "4200:80"
+    depends_on:
+      - autovault-api
+    networks:
+      - autovault-net
+
+  # ─── phpMyAdmin ───
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: autovault-phpmyadmin
+    restart: unless-stopped
+    ports:
+      - "8081:80"
+    environment:
+      PMA_HOST: mysql
+      PMA_USER: root
+      PMA_PASSWORD: root_secret
+    depends_on:
+      - mysql
+    networks:
+      - autovault-net
+
+volumes:
+  mysql_data:
+  model_storage:
+
+networks:
+  autovault-net:
+    driver: bridge

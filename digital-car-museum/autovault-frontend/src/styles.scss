@@ -1,0 +1,180 @@
+@use 'sass:color';
+@use 'styles/variables' as *;
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --color-primary:      #{$color-primary};
+  --color-secondary:    #{$color-secondary};
+  --color-accent:       #{$color-accent};
+  --color-accent-warm:  #{$color-accent-warm};
+  --color-accent-gold:  #{$color-accent-gold};
+  --color-accent-cyan:  #{$color-accent-cyan};
+  --color-surface:      #{$color-surface};
+  --color-text-primary: #{$color-text-primary};
+  --color-text-dark:    #{$color-text-dark};
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: $font-body;
+  background-color: $color-primary;
+  color: $color-text-primary;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-display;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+a {
+  color: $color-accent;
+  text-decoration: none;
+  transition: color $transition-fast;
+  &:hover { color: $color-accent-warm; }
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+// ── Buttons ──────────────────────────────────────────────────────────────────
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 28px;
+  border-radius: $border-radius;
+  border: none;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  transition: all $transition-normal;
+  position: relative;
+  overflow: hidden;
+
+  &-primary {
+    background: $gradient-accent;
+    color: white;
+    box-shadow: 0 4px 16px rgba(230, 57, 70, 0.3);
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(255,255,255,0.15);
+      opacity: 0;
+      transition: opacity $transition-fast;
+    }
+
+    &:hover {
+      box-shadow: $shadow-glow;
+      transform: translateY(-2px);
+      color: white;
+      &::after { opacity: 1; }
+    }
+  }
+
+  &-secondary {
+    background: rgba(255,255,255,0.06);
+    color: $color-accent-gold;
+    border: 1px solid rgba($color-accent-gold, 0.3);
+    backdrop-filter: blur(8px);
+
+    &:hover {
+      background: rgba($color-accent-gold, 0.12);
+      border-color: rgba($color-accent-gold, 0.6);
+      color: $color-accent-gold;
+      transform: translateY(-2px);
+    }
+  }
+
+  &-ghost {
+    background: transparent;
+    color: $color-text-primary;
+    border: 1px solid $color-border-bright;
+
+    &:hover {
+      background: rgba(255,255,255,0.06);
+      color: $color-text-primary;
+    }
+  }
+}
+
+// ── Scrollbar ─────────────────────────────────────────────────────────────────
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: $color-primary; }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient($color-accent, $color-accent-warm);
+  border-radius: 3px;
+}
+
+// ── Glass card utility ────────────────────────────────────────────────────────
+.glass {
+  background: $gradient-dark-card;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid $color-border;
+  border-radius: $border-radius-lg;
+}
+
+// ── Gradient text utility ─────────────────────────────────────────────────────
+.gradient-text-red {
+  background: $gradient-accent;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-gold {
+  background: $gradient-gold;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+// ── Skeleton ──────────────────────────────────────────────────────────────────
+@keyframes skeleton-pulse {
+  0%, 100% { opacity: 0.3; }
+  50%       { opacity: 0.6; }
+}
+
+.skeleton {
+  background: linear-gradient(90deg, $color-secondary 25%, $color-tertiary 50%, $color-secondary 75%);
+  background-size: 200% 100%;
+  border-radius: $border-radius-sm;
+  animation: skeleton-shimmer 1.6s ease-in-out infinite;
+}
+
+@keyframes skeleton-shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+// ── Section headings ──────────────────────────────────────────────────────────
+.section-heading {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-family: $font-display;
+  background: $gradient-gold;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 8px;
+}
+
+.section-sub {
+  color: $color-text-muted;
+  font-size: 0.95rem;
+}

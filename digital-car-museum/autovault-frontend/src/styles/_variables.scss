@@ -1,0 +1,116 @@
+@use 'sass:color';
+
+// ── AutoVault Design Tokens — Premium Redesign ──────────────────────────────
+
+// Core backgrounds
+$color-primary:       #07101D;   // Space black (base bg)
+$color-secondary:     #0D1E32;   // Deep navy (panels)
+$color-tertiary:      #142640;   // Elevated surface
+$color-surface:       rgba(255, 255, 255, 0.04);  // Glass surface
+$color-border:        rgba(255, 255, 255, 0.08);
+$color-border-bright: rgba(255, 255, 255, 0.15);
+
+// Accent palette
+$color-accent:        #E63946;   // Racing red
+$color-accent-warm:   #FF6B35;   // Speed orange
+$color-accent-gold:   #FFBE3D;   // Premium gold
+$color-accent-cyan:   #38BDF8;   // Electric sky blue
+$color-accent-purple: #818CF8;   // Indigo
+
+// Text
+$color-text-primary:  #EEF2FF;
+$color-text-muted:    rgba(238, 242, 255, 0.5);
+$color-text-dark:     #07101D;
+
+// Gradients
+$gradient-start:      #07101D;
+$gradient-end:        #1A0A2E;
+$gradient-hero:       linear-gradient(135deg, #07101D 0%, #0F1E35 45%, #1A0A2E 100%);
+$gradient-accent:     linear-gradient(135deg, #E63946 0%, #FF6B35 100%);
+$gradient-gold:       linear-gradient(135deg, #FFBE3D 0%, #FF8C42 100%);
+$gradient-cool:       linear-gradient(135deg, #38BDF8 0%, #818CF8 100%);
+$gradient-dark-card:  linear-gradient(145deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.01) 100%);
+
+// Typography
+$font-display: 'Playfair Display', Georgia, serif;
+$font-body:    'Inter', -apple-system, sans-serif;
+$font-mono:    'JetBrains Mono', monospace;
+
+// Border radius
+$border-radius-sm: 6px;
+$border-radius:    10px;
+$border-radius-lg: 18px;
+$border-radius-xl: 28px;
+
+// Transitions
+$transition-fast:   150ms ease;
+$transition-normal: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+$transition-slow:   600ms cubic-bezier(0.4, 0, 0.2, 1);
+
+// Shadows
+$shadow-sm:     0 2px 8px rgba(0, 0, 0, 0.5);
+$shadow-md:     0 4px 24px rgba(0, 0, 0, 0.6);
+$shadow-lg:     0 8px 48px rgba(0, 0, 0, 0.7);
+$shadow-glow:   0 0 32px rgba(230, 57, 70, 0.4);
+$shadow-gold:   0 0 32px rgba(255, 190, 61, 0.3);
+$shadow-cyan:   0 0 32px rgba(56, 189, 248, 0.3);
+
+// Z-index scale
+$z-base:    1;
+$z-overlay: 100;
+$z-modal:   200;
+$z-toast:   300;
+
+// ── Car-Museum Design Tokens (Extended) ─────────────────────────────────────
+
+// Metallic / Material finishes
+$gradient-chrome:       linear-gradient(135deg, #c9d6df 0%, #e2ebf0 40%, #c9d6df 70%, #a0b4bf 100%);
+$gradient-carbon:       repeating-linear-gradient(45deg, #1a1a1a 0px, #1a1a1a 2px, #2a2a2a 2px, #2a2a2a 4px);
+$gradient-racing-red:   linear-gradient(135deg, #c0392b 0%, #e74c3c 50%, #ff6b6b 100%);
+$gradient-midnight:     linear-gradient(135deg, #0F2027 0%, #203A43 50%, #2C5364 100%);
+$gradient-sunset:       linear-gradient(135deg, #FF512F 0%, #DD2476 100%);
+$gradient-electric:     linear-gradient(135deg, #00d2ff 0%, #3a7bd5 100%);
+
+// Road / Track colors
+$color-asphalt:         #1a1a1e;
+$color-track-yellow:    #FFDD00;
+$color-track-white:     rgba(255, 255, 255, 0.8);
+
+// Speedometer / Gauge palette
+$color-speed-low:       #22c55e;   // Green — safe zone
+$color-speed-mid:       #FFBE3D;   // Gold — caution
+$color-speed-high:      #E63946;   // Red — max
+
+// Glassmorphism variants
+$glass-dark:            rgba(7, 16, 29, 0.7);
+$glass-light:           rgba(255, 255, 255, 0.06);
+$glass-accent:          rgba(230, 57, 70, 0.08);
+$glass-gold:            rgba(255, 190, 61, 0.08);
+
+// Glow shadows (extended)
+$shadow-glow-red:       0 0 40px rgba(230, 57, 70, 0.5);
+$shadow-glow-gold:      0 0 40px rgba(255, 190, 61, 0.4);
+$shadow-glow-cyan:      0 0 40px rgba(56, 189, 248, 0.4);
+$shadow-glow-purple:    0 0 40px rgba(129, 140, 248, 0.4);
+
+// Interactive gradients for page backgrounds
+$bg-hero-dark:          radial-gradient(ellipse at top left, rgba(230, 57, 70, 0.15) 0%, transparent 50%),
+                        radial-gradient(ellipse at bottom right, rgba(129, 140, 248, 0.12) 0%, transparent 50%),
+                        #07101D;
+
+$bg-section-alt:        linear-gradient(180deg, #07101D 0%, #0D1E32 100%);
+
+$bg-feature-red:        radial-gradient(ellipse at 80% 80%, rgba(230,57,70,0.25) 0%, transparent 60%);
+$bg-feature-gold:       radial-gradient(ellipse at 80% 80%, rgba(255,190,61,0.2) 0%, transparent 60%);
+$bg-feature-cyan:       radial-gradient(ellipse at 80% 80%, rgba(56,189,248,0.2) 0%, transparent 60%);
+$bg-feature-purple:     radial-gradient(ellipse at 80% 80%, rgba(129,140,248,0.2) 0%, transparent 60%);
+
+// Typography scale (fluid)
+$text-xs:   clamp(0.65rem, 1vw, 0.75rem);
+$text-sm:   clamp(0.8rem, 1.2vw, 0.9rem);
+$text-base: clamp(0.9rem, 1.5vw, 1rem);
+$text-lg:   clamp(1rem, 2vw, 1.2rem);
+$text-xl:   clamp(1.2rem, 2.5vw, 1.5rem);
+$text-2xl:  clamp(1.5rem, 3vw, 2rem);
+$text-3xl:  clamp(2rem, 4vw, 3rem);
+$text-hero: clamp(4rem, 12vw, 10rem);
