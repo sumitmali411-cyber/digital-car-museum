@@ -176,11 +176,8 @@ from shap_e.util.notebooks import create_pan_cameras, decode_latent_mesh
 After export, apply Draco compression to reduce GLB size by 60–90%:
 
 ```bash
-# Install gltf-pipeline
-npm install -g gltf-pipeline
-
-# Compress with Draco
-gltf-pipeline -i input.glb -o output.glb --draco.compressionLevel 7
+# Compress with Draco using npx (avoids global install)
+npx gltf-pipeline -i input.glb -o output.glb --draco.compressionLevel 7
 
 # Validate the result
 npx gltf-validator output.glb
