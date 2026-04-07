@@ -1,0 +1,56 @@
+# Node
+node_modules/
+dist/
+build/
+.next/
+.nuxt/
+
+# Java / Maven / Gradle
+target/
+*.class
+*.jar
+*.war
+*.ear
+.gradle/
+build/
+
+# Environment files
+.env
+.env.*
+.env.local
+.env.*.local
+!.env.example
+firebase-applet-config.json
+
+# IDE
+.idea/
+*.iml
+.vscode/
+*.suo
+*.user
+
+# OS
+.DS_Store
+Thumbs.db
+*.log
+
+# Flutter / Dart
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+build/
+*.g.dart
+
+# Angular
+.angular/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Sensitive
+*.pem
+*.key
+*.p12
