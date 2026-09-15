@@ -9,10 +9,10 @@ services:
     ports:
       - "3307:3306"
     environment:
-      MYSQL_ROOT_PASSWORD: root_secret
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:?set MYSQL_ROOT_PASSWORD in .env}
       MYSQL_DATABASE: autovault
       MYSQL_USER: autovault
-      MYSQL_PASSWORD: autovault_secret
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:?set MYSQL_PASSWORD in .env}
     volumes:
       - mysql_data:/var/lib/mysql
       - ./docker/mysql/init:/docker-entrypoint-initdb.d
@@ -33,11 +33,11 @@ services:
       - "8180:8080"
     environment:
       KEYCLOAK_ADMIN: admin
-      KEYCLOAK_ADMIN_PASSWORD: admin
+      KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD:?set KEYCLOAK_ADMIN_PASSWORD in .env}
       KC_DB: mysql
       KC_DB_URL: jdbc:mysql://mysql:3306/keycloak?createDatabaseIfNotExist=true
       KC_DB_USERNAME: root
-      KC_DB_PASSWORD: root_secret
+      KC_DB_PASSWORD: ${KC_DB_PASSWORD:?set KC_DB_PASSWORD in .env}
       KC_HOSTNAME: localhost
       KC_HOSTNAME_PORT: 8180
       KC_HTTP_ENABLED: "true"
@@ -64,7 +64,7 @@ services:
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/autovault?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true
       SPRING_DATASOURCE_USERNAME: autovault
-      SPRING_DATASOURCE_PASSWORD: autovault_secret
+      SPRING_DATASOURCE_PASSWORD: ${SPRING_DATASOURCE_PASSWORD:?set SPRING_DATASOURCE_PASSWORD in .env}
       SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI: http://keycloak:8080/realms/autovault
       SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI: http://keycloak:8080/realms/autovault/protocol/openid-connect/certs
     volumes:
@@ -101,7 +101,7 @@ services:
     environment:
       PMA_HOST: mysql
       PMA_USER: root
-      PMA_PASSWORD: root_secret
+      PMA_PASSWORD: ${PMA_PASSWORD:?set PMA_PASSWORD in .env}
     depends_on:
       - mysql
     networks:

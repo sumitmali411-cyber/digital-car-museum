@@ -59,7 +59,7 @@
       "email": "admin@autovault.com",
       "enabled": true,
       "emailVerified": true,
-      "credentials": [{"type": "password", "value": "admin123", "temporary": false}],
+      "credentials": [{"type": "password", "value": "admin123", "temporary": true}],
       "realmRoles": ["admin", "user"]
     },
     {
@@ -67,7 +67,7 @@
       "email": "curator@autovault.com",
       "enabled": true,
       "emailVerified": true,
-      "credentials": [{"type": "password", "value": "curator123", "temporary": false}],
+      "credentials": [{"type": "password", "value": "curator123", "temporary": true}],
       "realmRoles": ["curator", "user"]
     },
     {
@@ -75,7 +75,7 @@
       "email": "visitor@autovault.com",
       "enabled": true,
       "emailVerified": true,
-      "credentials": [{"type": "password", "value": "visitor123", "temporary": false}],
+      "credentials": [{"type": "password", "value": "visitor123", "temporary": true}],
       "realmRoles": ["user"]
     }
   ]
